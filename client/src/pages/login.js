@@ -3,6 +3,7 @@ import login from '../redux/apicalls';
 import { useDispatch} from 'react-redux';
 import { Link,useHistory } from 'react-router-dom';
 import { publicRequest } from '../requestMethods';
+import { loginSuccess } from '../redux/userRedux';
 
 const LOgin = ()=> {
     const [email,setEmail]=useState("");
@@ -13,7 +14,6 @@ const LOgin = ()=> {
   
     const handleClick = async (e)=>{
         e.preventDefault();          
-        dispatch(loginSuccess(res.data));     
     
 
     try{
@@ -25,6 +25,7 @@ const LOgin = ()=> {
        console.log('Response:', res);
 
        if(res.data) {
+        dispatch(loginSuccess(res.data));
           window.alert("Successfully Logged In")
           history.push("/");
        }
