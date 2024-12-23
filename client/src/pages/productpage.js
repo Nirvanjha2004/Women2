@@ -21,10 +21,10 @@ const ProductPage = ()=>{
 
  const history = useHistory();
 
-  if(!user){
-    window.alert("Please Login First");
-    history.push("/");
-  }
+//   if(!user){
+//     window.alert("Please Login First");
+//     history.push("/");
+//   }
      
      useEffect(()=>{
         const getproduct = async ()=>{

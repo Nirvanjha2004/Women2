@@ -30,7 +30,7 @@ const login = async function(req,res){
     const user = await User.findOne({email});
 
     if(!user){
-        throw new UnauthenticatedError("Invalid credentials");
+        throw new UnauthenticatedError("Register first");
     }
   
     const isPasswordCorrect = await user.comparePassword(password);     
