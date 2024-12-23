@@ -5,8 +5,19 @@ const {StatusCodes} = require('http-status-codes');
 const register = async function(req,res){
     const user = await User.create({...req.body});
     const token = user.createJWT();
+    console.log(user);
    
-    return res.status(StatusCodes.CREATED).json({user:{name:user.name},token})
+    return res.status(StatusCodes.CREATED).json({
+        user: {
+            id: user._id,
+            email: user.email,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            username: user.username,
+            isAdmin: user.isAdmin
+        },
+        token
+    });
 }
 
 const login = async function(req,res){
