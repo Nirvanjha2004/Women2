@@ -20,13 +20,18 @@ const rateLimiter = require("express-rate-limit");
 const path = require('path');
 app.use(express.json());
 
-app.use(cors(
-    {
-        origin: "*",
-        credentials: true,
-    }
-));
+const corsOptions = {
+    origin: '*', // Replace with your frontend's exact URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+  };
+app.use((req, res, next) => {
+    console.log('CORS headers applied:', res.getHeaders());
+    next();
+  });
+app.options('*', cors(corsOptions));
 app.use(helmet());
+app.use(cors(corsOptions));
 app.use(xss());
 
 app.use(rateLimiter({
