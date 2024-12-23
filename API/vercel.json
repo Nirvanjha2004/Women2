@@ -8,19 +8,15 @@
   ],
   "routes": [
     {
-      "src": "/api/v1/auth/(.*)",
+      "src": "/api/v1/(.*)",
       "dest": "app.js",
-      "methods": ["POST", "OPTIONS"],
+      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
       "headers": {
         "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE, OPTIONS",
         "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization, token",
         "Access-Control-Allow-Credentials": "true"
       }
-    },
-    {
-      "src": "/(.*)",
-      "dest": "app.js"
     }
   ]
 }

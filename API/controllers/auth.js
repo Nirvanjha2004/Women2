@@ -30,8 +30,11 @@ const login = async function(req, res) {
     const token = user.createJWT();
     return res.status(StatusCodes.OK).json({
         user: {
-            isAdmin: user.isAdmin,
-            id: user._id
+            id: user._id,
+            email: user.email,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            isAdmin: user.isAdmin
         },
         token
     });

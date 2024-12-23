@@ -11,30 +11,44 @@ const Login = () => {
         e.preventDefault();
         
         try {
-            console.log('Sending login request to:', `${publicRequest.defaults.baseURL}/auth/login`);
-            console.log('Login data:', { email, password });
+            console.log('Attempting login with:', { email, password });
             
             const res = await publicRequest.post("/auth/login", {
                 email,
                 password
             });
+            
             console.log('Login response:', res);
 
-            if (res.data) {
-                // Store the token and user data
-                localStorage.setItem("user", JSON.stringify(res.data));
+            if (res.data && res.data.token) {
+                // Store the token and user data in localStorage
+                localStorage.setItem("persist:root", JSON.stringify({
+                    user: JSON.stringify({
+                        currentUser: res.data.user,
+                        token: res.data.token
+                    })
+                }));
+                
                 window.alert("Successfully Logged In");
-                history.push("/"); // Redirect to home page
+                history.push("/");
+            } else {
+                throw new Error('Invalid response format');
             }
             
         } catch (err) {
             console.error('Login error:', err);
-            console.error('Error response:', err.response);
             
-            if (err.response?.status === 401) {
-                window.alert("Invalid email or password");
+            if (err.response) {
+                console.error('Error response:', err.response);
+                if (err.response.status === 401) {
+                    window.alert("Invalid email or password");
+                } else if (err.response.status === 404) {
+                    window.alert("Server error: Route not found");
+                } else {
+                    window.alert(`Login failed: ${err.response.data?.msg || 'Unknown error'}`);
+                }
             } else {
-                window.alert("Login failed. Please try again.");
+                window.alert("Network error. Please try again later.");
             }
         }
     };
