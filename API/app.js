@@ -1,7 +1,7 @@
 require('dotenv').config();
 require('express-async-errors');
 const express = require('express');
-export const app = express();
+const app = express();
 
 const authRouter = require('./routes/auth');
 const productRouter = require('./routes/product');
@@ -69,3 +69,5 @@ app.get('/',(req,res)=>{
 
 
 start();
+
+module.exports = app;
