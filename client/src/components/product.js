@@ -13,7 +13,7 @@ const Products = ({cat,filters,sort})=>{
     useEffect(()=>{
         const getproducts = async ()=>{
             try{
-           const res = await axios.get( cat ? `https://ecommerce-api-tdlg.onrender.com/api/v1/product?category=${cat}`: "https://ecommerce-api-tdlg.onrender.com/api/v1/product");    
+           const res = await axios.get( cat ? `https://women2-backend-kizwvlbf5-nirvan-jhas-projects.vercel.app/api/v1/product?category=${cat}`: "https://women2-backend-kizwvlbf5-nirvan-jhas-projects.vercel.app/api/v1/product");    
             setproducts(res.data.products);
             
             }catch(err){
