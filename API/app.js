@@ -25,9 +25,10 @@ const rateLimiter = require("express-rate-limit");
 app.use(express.json());
 
 const corsOptions = {
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    origin: ['http://localhost:3000', 'your-frontend-domain.vercel.app'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'token'],
+    credentials: true
 };
 
 app.use(helmet());
@@ -38,6 +39,8 @@ app.use(rateLimiter({
    windowMs: 15*60*1000,
    max: 100,
 }));
+
+app.options('*', cors(corsOptions));
 
 // Test route
 app.get('/', (req, res) => {
