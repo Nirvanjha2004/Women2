@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "https://ecommerce-api-tdlg.onrender.com/api/v1";
+const BASE_URL = "https://women2-backend-kizwvlbf5-nirvan-jhas-projects.vercel.app/";
 
 export const publicRequest = axios.create({
   baseURL:BASE_URL,
