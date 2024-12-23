@@ -21,10 +21,7 @@ const helmet = require('helmet');
 const xss = require('xss-clean');
 const rateLimiter = require("express-rate-limit");
 
-// Middleware
-app.use(cors(corsOptions));
-app.use(express.json());
-
+// Define CORS options first
 const corsOptions = {
     origin: '*',
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
@@ -32,7 +29,10 @@ const corsOptions = {
     credentials: true
 };
 
+// Middleware
+app.use(express.json());
 app.use(helmet());
+app.use(cors(corsOptions));  // Use CORS after defining options
 app.use(xss());
 
 app.use(rateLimiter({
@@ -40,6 +40,7 @@ app.use(rateLimiter({
    max: 100,
 }));
 
+// Handle preflight requests
 app.options('*', cors(corsOptions));
 
 // Test route
