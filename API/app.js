@@ -30,9 +30,9 @@ const corsOptions = {
 };
 
 // Middleware
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(helmet());
-app.use(cors(corsOptions));  // Use CORS after defining options
 app.use(xss());
 
 app.use(rateLimiter({
@@ -43,17 +43,17 @@ app.use(rateLimiter({
 // Handle preflight requests
 app.options('*', cors(corsOptions));
 
-// Test route
-app.get('/', (req, res) => {
-    res.json({ message: "hello world" });
-});
-
-// Routes
+// Mount routes with explicit path
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/product', productRouter);
 app.use('/api/v1/cart', cartRouter);
 app.use('/api/v1/order', orderRouter);
 app.use('/api/v1/user', userRouter);
+
+// Test route
+app.get('/', (req, res) => {
+    res.json({ message: "hello world" });
+});
 
 // Error handling middleware should be last
 app.use(notFound);
