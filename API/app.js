@@ -22,6 +22,7 @@ const xss = require('xss-clean');
 const rateLimiter = require("express-rate-limit");
 
 // Middleware
+app.use(cors(corsOptions));
 app.use(express.json());
 
 const corsOptions = {
@@ -32,7 +33,6 @@ const corsOptions = {
 };
 
 app.use(helmet());
-app.use(cors(corsOptions));
 app.use(xss());
 
 app.use(rateLimiter({
@@ -51,8 +51,8 @@ app.get('/', (req, res) => {
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/product', productRouter);
 app.use('/api/v1/cart', cartRouter);
-app.use("/api/v1/order", orderRouter);
-app.use("/api/v1/user", userRouter);
+app.use('/api/v1/order', orderRouter);
+app.use('/api/v1/user', userRouter);
 
 // Error handling middleware should be last
 app.use(notFound);

@@ -25,19 +25,26 @@ const Register = ()=>{
     
     try{
        const user = {email,password,firstname,lastname,username};
+       console.log('Sending request to:', `${publicRequest.defaults.baseURL}/auth/register`);
+       console.log('Request data:', user);
        
        const res = await publicRequest.post("/auth/register",user);
+       console.log('Response:', res);
 
-       if(res){
+       if(res.data) {
           window.alert("Successfully Registered")
           history.push("/login");
        }
        
-    }catch(err){
-       
-        if(err.message === "Request failed with status code 400"){
-            window.alert("Something went try with different EmailId");
-        }   
+    }catch(err) {
+        console.error('Registration error:', err);
+        console.error('Error response:', err.response);
+        
+        if(err.response?.status === 400) {
+            window.alert("Something went wrong, try with different EmailId");
+        } else {
+            window.alert("Registration failed. Please try again.");
+        }
     }
    }
     
