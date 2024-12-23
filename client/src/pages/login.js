@@ -1,16 +1,44 @@
 import React,{useState} from 'react';
 import login from '../redux/apicalls';
 import { useDispatch} from 'react-redux';
-import { Link} from 'react-router-dom';
+import { Link,useHistory } from 'react-router-dom';
+import { publicRequest } from '../requestMethods';
+
 const LOgin = ()=> {
     const [email,setEmail]=useState("");
     const [password,setPassword] = useState("");
     const dispatch = useDispatch();
+    const history = useHistory();
    
   
-    const handleClick = (e)=>{
+    const handleClick = async (e)=>{
         e.preventDefault();          
         login(dispatch,{email,password});     
+    
+
+    try{
+       const user = {email,password};
+       console.log('Sending request to:', `${publicRequest.defaults.baseURL}/auth/login`);
+       console.log('Request data:', user);
+       
+       const res = await publicRequest.post("/auth/login",user);
+       console.log('Response:', res);
+
+       if(res.data) {
+          window.alert("Successfully Logged In")
+          history.push("/");
+       }
+       
+    }catch(err) {
+        console.error('Registration error:', err);
+        console.error('Error response:', err.response);
+        
+        if(err.response?.status === 400) {
+            window.alert("Something went wrong, try with different EmailId or Password");
+        } else {
+            window.alert("Login failed. Please try again.");
+        }
+    }
     }
 
     return (
