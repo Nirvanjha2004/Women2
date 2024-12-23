@@ -1,7 +1,7 @@
 require('dotenv').config();
 require('express-async-errors');
 const express = require('express');
-const app = express();
+export const app = express();
 
 const authRouter = require('./routes/auth');
 const productRouter = require('./routes/product');
