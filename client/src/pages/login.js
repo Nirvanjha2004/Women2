@@ -13,7 +13,7 @@ const LOgin = ()=> {
   
     const handleClick = async (e)=>{
         e.preventDefault();          
-        login(dispatch,{email,password});     
+        dispatch(loginSuccess(res.data));     
     
 
     try{
