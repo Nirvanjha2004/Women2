@@ -13,10 +13,10 @@ const ProductList = ()=>{
     const [sort,setSort] = useState("newest");
     const history = useHistory();
 
-  if(!user){
-    window.alert("Please Login First");
-    history.push("/");
-  }
+  // if(!user){
+  //   window.alert("Please Login First");
+  //   history.push("/");
+  // }
 
     const handleFilters = (e)=>{
          const value = e.target.value;

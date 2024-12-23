@@ -15,10 +15,10 @@ const Cart = () => {
  console.log(cart);
   const history = useHistory();
 
-  if(!user){
-    window.alert("Please Login First");
-    history.push("/");
-  }
+  // if(!user){
+  //   window.alert("Please Login First");
+  //   history.push("/");
+  // }
 
   const [loading, setLoading] = useState(false);
   const [address, setAddress] = useState({});
