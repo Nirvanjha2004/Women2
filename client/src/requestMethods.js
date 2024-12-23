@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "https://women2-backend-bdrdorr7q-nirvan-jhas-projects.vercel.app/api/v1";
+const BASE_URL = "https://women2-backend-gpnu0r4qk-nirvan-jhas-projects.vercel.app/api/v1/";
 
 export const publicRequest = axios.create({
   baseURL:BASE_URL,
