@@ -16,7 +16,7 @@ const connectDB = require('./db/connect');
 const cors = require('cors');
 const helmet = require('helmet');
 const xss = require('xss-clean');
-const rateLimtter = require("express-rate-limit");
+const rateLimiter = require("express-rate-limit");
 const path = require('path');
 app.use(express.json());
 
@@ -29,7 +29,7 @@ app.use(cors(
 app.use(helmet());
 app.use(xss());
 
-app.use(rateLimitter({
+app.use(rateLimiter({
    windowMs: 15*60 *1000,
    max : 100,
 }));
