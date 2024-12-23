@@ -25,7 +25,7 @@ const rateLimiter = require("express-rate-limit");
 app.use(express.json());
 
 const corsOptions = {
-    origin: ['http://localhost:3000', 'your-frontend-domain.vercel.app'],
+    origin: '*',
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'token'],
     credentials: true
