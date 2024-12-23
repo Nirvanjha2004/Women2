@@ -63,5 +63,9 @@ const start = async()=>{
 }
 
 
+app.get('/',(req,res)=>{
+    res.send("hello world");
+})
+
 
 start();
